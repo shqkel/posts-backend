@@ -29,7 +29,7 @@ public class Post {
     @Column(nullable = false, length = 4000)
     private String content;
 
-    @Column(columnDefinition = "date default sysdate") // 생략시, 컬럼타입 timestamp 지정
+//    @Column(columnDefinition = "date default sysdate") // 생략시, 컬럼타입 timestamp 지정
     @CreationTimestamp
     private LocalDateTime createdAt;
 
