@@ -45,7 +45,7 @@ public class NaverProfileResponseDto {
 
         public Member toMember() {
             return Member.builder()
-                    .memberId(id + "@naver")
+                    .username(id + "@naver")
                     .password("1234")
                     .name(name)
                     .email(email)

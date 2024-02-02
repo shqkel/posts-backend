@@ -1,6 +1,6 @@
 package com.sh.app.auth.service;
 
-import com.sh.app.auth.entity.AuthEnum;
+import com.sh.app.auth.entity.RoleAuth;
 import com.sh.app.auth.entity.Authority;
 import com.sh.app.auth.entity.Member;
 import com.sh.app.auth.entity.MemberDetails;
@@ -22,7 +22,7 @@ public class AuthService implements UserDetailsService {
     private final AuthorityRepository authorityRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findByMemberId(username);
+        Member member = memberRepository.findByUsername(username);
         if(member == null)
             throw new UsernameNotFoundException(username);
         return new MemberDetails(member);
@@ -31,10 +31,10 @@ public class AuthService implements UserDetailsService {
     public MemberDetails createMember(Member member) {
         memberRepository.save(member);
         Authority authority = Authority.builder()
-                                .auth(AuthEnum.ROLE_USER)
+                                .name(RoleAuth.ROLE_USER)
                                 .build();
         member.addAuthority(authority); // set member_id here!
         authorityRepository.save(authority);
-        return (MemberDetails) loadUserByUsername(member.getMemberId());
+        return (MemberDetails) loadUserByUsername(member.getUsername());
     }
 }

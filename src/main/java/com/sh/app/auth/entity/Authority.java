@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 	uniqueConstraints = 
 		@UniqueConstraint(
 				name = "uq_authority",
-				columnNames = {"member_id", "auth"}))
+				columnNames = {"member_id", "name"}))
 @Data
 @Builder
 @NoArgsConstructor(force = true) // final필드, @NonNull필드를 기본생성자안에서 초기화 한다.
@@ -28,5 +28,5 @@ public class Authority {
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private AuthEnum auth;
+	private RoleAuth name;
 }

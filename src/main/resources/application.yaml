@@ -1,23 +1,25 @@
 # application.yaml
-server:
-  port: 8080
+
+spring:
+  profiles:
+    default: h2 # profiles 복수개 입력 가능
+    active: oracle
+  sql:
+    init:
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+      mode: 'never'
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        '[show_sql]': true
+        '[format_sql]': true
 
 logging:
   level:
     root: info
     '[com.sh.app]': debug
-
-spring:
-  datasource:
-    url: jdbc:h2:tcp://localhost/~/test
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        '[show_sql]': true
-        '[format_sql]': true
+#    '[org.hibernate.SQL]': debug
+#    '[org.hibernate.type]': trace

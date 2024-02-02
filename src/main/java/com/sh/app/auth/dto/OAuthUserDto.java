@@ -16,7 +16,7 @@ public class OAuthUserDto {
 
     public Member toMember() {
         return Member.builder()
-                .memberId(id)
+                .username(id)
                 .password("1234") // 임의 비밀번호 not null
                 .name(name)
                 .email(email)

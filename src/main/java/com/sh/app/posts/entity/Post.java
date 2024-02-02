@@ -10,18 +10,18 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "post")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(name = "SEQ_POST_ID", initialValue = 1, allocationSize = 1)
 public class Post {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "SEQ_POST_ID")
+    @GeneratedValue
     private Long id;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false, length = 1000)
     private String title;
 
     private String writer;
@@ -29,7 +29,6 @@ public class Post {
     @Column(nullable = false, length = 4000)
     private String content;
 
-//    @Column(columnDefinition = "date default sysdate") // 생략시, 컬럼타입 timestamp 지정
     @CreationTimestamp
     private LocalDateTime createdAt;
 

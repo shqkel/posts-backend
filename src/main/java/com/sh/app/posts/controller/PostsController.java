@@ -29,10 +29,7 @@ public class PostsController {
     }
 
     @GetMapping
-    public ResponseEntity<?> findAll(@PageableDefault(value = 5, page = 0) Pageable pageable){
-        // di받지 않는다면... Pageable객체 직접 생성
-//        Pageable pageable = PageRequest.of(0, 5);
-
+    public ResponseEntity<?> findAll(@PageableDefault(size = 5, page = 0) Pageable pageable){
         Page<Post> result = postsService.findAll(pageable);
         // content, number(int 현재페이지 0-based), totalPages, totalElements(long), numberOfElement(현재 게시물수 : <= size), size, sort({empty:false, sorted:false, unsorted:true})...
         return ResponseEntity.ok(result);

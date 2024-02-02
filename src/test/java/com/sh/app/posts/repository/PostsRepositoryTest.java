@@ -21,20 +21,17 @@ class PostsRepositoryTest {
     @Autowired
     private PostsRepository postsRepository;
 
-    @Test
-    void postsREpositoryIsNotNull() {
-        assertThat(postsRepository).isNotNull();
-    }
-
     @DisplayName("게시물 등록")
     @Test
-    @Transactional // query가 실행되지는 않는다.
+    @Transactional // 트랜잭션 처리후 롤백한다. (DML Query 요청을 전송하지 않는다.)
     void insertPost() {
+        // given
         Post post = Post.builder()
                 .title("Why pay for ChatGPT-4")
                 .writer("honggd")
                 .content("Stop pay for GPT-4 when you can experience it for free with Monica - Your ChatGPT Copilot in Chrome that will boost your productivity. Give it a try RIGHT NOW!!")
                 .build();
+        // when
         postsRepository.save(post);
         assertThat(post.getId()).isNotNull();
         assertThat(post.getCreatedAt()).isNotNull();
